@@ -6,14 +6,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import API from '../../utils/api';
-import { DEMO_CREDENTIALS, loginSchema, type LoginFormValues } from '../../utils/auth';
+import { loginSchema, type LoginFormValues } from '../../utils/auth';
 
 export default function Login() {
   const router = useRouter();
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -48,39 +47,6 @@ export default function Login() {
     }
   };
 
-  const handleDemoLogin = async (role: 'admin' | 'user') => {
-    const credentials = DEMO_CREDENTIALS[role];
-    setValue('email', credentials.email, { shouldDirty: true, shouldTouch: true });
-    setValue('password', credentials.password, { shouldDirty: true, shouldTouch: true });
-
-    // Try login first; if credentials are invalid, attempt to register then login again
-    try {
-      await API.post('/auth/login', { email: credentials.email, password: credentials.password });
-      // If login succeeded, submit via form flow to set local state and redirect
-      await handleSubmit(submitLogin)();
-    } catch (err: any) {
-      const status = err.response?.status;
-      const message = err.response?.data?.message || '';
-
-      // If user doesn't exist or invalid credentials, try registering then login
-      if (status === 401 || status === 404 || /invalid credentials/i.test(message) || /not found/i.test(message)) {
-        try {
-          toast.loading('Creating demo account...');
-          const name = role === 'admin' ? 'Admin' : 'Demo User';
-          await API.post('/auth/register', { name, email: credentials.email, password: credentials.password });
-          toast.dismiss();
-          toast.success('Demo account ready — logging in');
-          await handleSubmit(submitLogin)();
-        } catch (regErr: any) {
-          toast.dismiss();
-          toast.error(regErr.response?.data?.message || 'Demo registration failed');
-        }
-      } else {
-        toast.error(message || 'Demo login failed');
-      }
-    }
-  };
-
   const handleGoogleLogin = () => {
     toast.success('Google Sign-in initiated (Mock Flow)');
   };
@@ -103,24 +69,6 @@ export default function Login() {
             </p>
           </div>
 
-          <div className="mb-6 grid gap-3 sm:grid-cols-2">
-            <button
-              type="button"
-              onClick={() => handleDemoLogin('admin')}
-              className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-emerald-300 hover:text-emerald-700"
-              disabled={isSubmitting}
-            >
-              Login as Admin
-            </button>
-            <button
-              type="button"
-              onClick={() => handleDemoLogin('user')}
-              className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-emerald-300 hover:text-emerald-700"
-              disabled={isSubmitting}
-            >
-              Login as User
-            </button>
-          </div>
 
           <button
             type="button"
