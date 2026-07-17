@@ -51,6 +51,14 @@ src/
  Run Development Server
 npm run dev
 
+### 🔑 Test Accounts
+To review the different roles and features without registering a new account, please use these credentials:
+
+| Role | Email | Password |
+| :--- | :--- | :--- |
+| **Admin** | admin@example.com | AdminPassword123 |
+| **User** | user@example.com | 123456 |
+
 🛡️ Admin Moderation Flow
 
 The Admin Dashboard provides full control over the platform:
