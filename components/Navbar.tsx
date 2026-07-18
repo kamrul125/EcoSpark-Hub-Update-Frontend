@@ -120,7 +120,7 @@ export default function Navbar() {
                 <Link href="/auth/login" className="rounded-2xl border border-neutral-200 px-4 py-2 text-sm font-semibold text-neutral-900 transition-all hover:border-primary-400 hover:shadow-medium focus-ring dark:border-neutral-700 dark:text-neutral-100">
                   Login
                 </Link>
-                <Link href="/auth/signup" className="rounded-2xl bg-primary-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-primary-700 hover:shadow-medium focus-ring">
+                <Link href="/auth/signup" className="inline-flex items-center rounded-full px-2 py-1 text-sm font-semibold uppercase tracking-[0.18em] text-neutral-700 transition-all hover:bg-black/5 hover:underline hover:underline-offset-4 focus-ring dark:text-neutral-200 dark:hover:bg-white/5">
                   Sign Up
                 </Link>
               </>
@@ -180,7 +180,7 @@ export default function Navbar() {
                 <Link href="/auth/login" className="block rounded-2xl border border-neutral-200 px-4 py-3 text-center text-sm font-semibold text-neutral-900 transition-all hover:border-primary-400 focus-ring dark:border-neutral-700 dark:text-neutral-100">
                   Login
                 </Link>
-                <Link href="/auth/signup" className="block rounded-2xl bg-primary-600 px-4 py-3 text-center text-sm font-semibold text-white transition-all hover:bg-primary-700 hover:shadow-medium">
+                <Link href="/auth/signup" className="block rounded-full px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.18em] text-neutral-700 transition-all hover:bg-black/5 hover:underline hover:underline-offset-4 dark:text-neutral-200 dark:hover:bg-white/5">
                   Sign Up
                 </Link>
               </>
