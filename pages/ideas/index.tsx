@@ -151,7 +151,7 @@ export default function ExploreIdeas() {
           </div>
 
           {/* Filters and Sorting */}
-          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap gap-3">
               {categoryTabs.map((category) => (
                 <button
@@ -169,28 +169,44 @@ export default function ExploreIdeas() {
               ))}
             </div>
 
-            <div className="flex items-center gap-4">
-              <label className="text-sm font-semibold text-slate-700 dark:text-slate-200">Sort by:</label>
-              <select
-                value={sortBy}
-                onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}
-                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm shadow-sm focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/20 dark:border-slate-700 dark:bg-slate-900"
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-4">
+                <label className="text-sm font-semibold text-slate-700 dark:text-slate-200">Sort by:</label>
+                <select
+                  value={sortBy}
+                  onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}
+                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm shadow-sm focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/20 dark:border-slate-700 dark:bg-slate-900"
+                >
+                  <option value="newest">Newest</option>
+                  <option value="most_voted">Most Voted</option>
+                </select>
+              </div>
+              <div className="flex items-center gap-4">
+                <label className="text-sm font-semibold text-slate-700 dark:text-slate-200">Status:</label>
+                <select
+                  value={selectedStatus}
+                  onChange={(e) => { setSelectedStatus(e.target.value); setCurrentPage(1); }}
+                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm shadow-sm focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/20 dark:border-slate-700 dark:bg-slate-900"
+                >
+                  {statusOptions.map((s) => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
+                </select>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedCategory("All");
+                  setSelectedStatus("All");
+                  setSortBy("newest");
+                  setSearchQuery("");
+                  setDebouncedSearch("");
+                  setCurrentPage(1);
+                }}
+                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
               >
-                <option value="newest">Newest</option>
-                <option value="most_voted">Most Voted</option>
-              </select>
-            </div>
-            <div className="flex items-center gap-4">
-              <label className="text-sm font-semibold text-slate-700 dark:text-slate-200">Status:</label>
-              <select
-                value={selectedStatus}
-                onChange={(e) => { setSelectedStatus(e.target.value); setCurrentPage(1); }}
-                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm shadow-sm focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/20 dark:border-slate-700 dark:bg-slate-900"
-              >
-                {statusOptions.map((s) => (
-                  <option key={s} value={s}>{s}</option>
-                ))}
-              </select>
+                Reset filters
+              </button>
             </div>
           </div>
 
@@ -203,7 +219,7 @@ export default function ExploreIdeas() {
 
           {/* Ideas Grid */}
           {loading ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
               {Array.from({ length: 8 }).map((_, index) => (
                 <div
                   key={index}
@@ -225,7 +241,7 @@ export default function ExploreIdeas() {
               ))}
             </div>
           ) : (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
               {ideas.length > 0 ? (
                 ideas.map((idea) => (
                   <IdeaCard

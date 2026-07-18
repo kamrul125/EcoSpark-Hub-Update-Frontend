@@ -6,6 +6,7 @@ import FeaturedIdeasSection from "../components/sections/FeaturedIdeasSection";
 import BlogPreviewSection from "../components/sections/BlogPreviewSection";
 import TestimonialSection from "../components/sections/TestimonialSection";
 import FaqSection from "../components/sections/FaqSection";
+import NewsletterSection from "../components/sections/NewsletterSection";
 
 export default function Home() {
   return (
@@ -34,6 +35,9 @@ export default function Home() {
 
         {/* Section 8: FAQ */}
         <FaqSection />
+
+        {/* Section 9: Newsletter / Community updates */}
+        <NewsletterSection />
       </main>
     </div>
   );
